@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/RocketListFragment">
+
+    <fragment
+        android:id="@+id/RocketListFragment"
+        android:name="com.spacex.usecases.main.RocketListFragment"
+        android:label="@string/rockets_list_label"
+        tools:layout="@layout/fragment_rocket_list">
+
+        <action
+            android:id="@+id/action_RocketListFragment_to_RocketFragment"
+            app:destination="@id/RocketFragment"
+            app:enterAnim="@anim/slide_enter_right_left"
+            app:exitAnim="@anim/slide_exit_right_left"
+            app:popEnterAnim="@anim/slide_enter_left_right"
+            app:popExitAnim="@anim/slide_exit_left_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/RocketFragment"
+        android:name="com.spacex.usecases.main.RocketFragment"
+        android:label="@string/rocket_label"
+        tools:layout="@layout/fragment_rocket">
+
+        <argument
+            android:name="rocketID"
+            android:defaultValue="0"
+            app:argType="string" />
+    </fragment>
+</navigation>

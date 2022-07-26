@@ -1,0 +1,37 @@
+<resources>
+    <!-- General -->
+    <string name="app_name">SpaceX</string>
+    <string name="loading">Loading...</string>
+
+    <!-- Rockets list fragment -->
+    <string name="rockets_list_label">Rockets</string>
+    <string name="rockets_list_filter">Filter</string>
+    <string name="rockets_list_engines">engines</string>
+
+    <!-- Rocket fragment -->
+    <string name="rocket_label">Rocket</string>
+    <string name="rocket_sample_text">With the ability to lift into orbit over 54 metric tons (119,000 lb)--a mass equivalent to a 737 jetliner loaded with passengers, crew, luggage and fuel--Falcon Heavy can lift more than twice the payload of the next closest operational vehicle, the Delta IV Heavy, at one-third the cost.</string>
+    <string name="rocket_launches">Launches</string>
+    <string name="rocket_info">Information</string>
+    <string name="rocket_launches_success">Success</string>
+    <string name="rocket_launches_failure">Failure</string>
+    <string name="rocket_launches_engines">engines</string>
+    <string name="rocket_engines">engines</string>
+    <string name="rocket_mass">kg</string>
+    <string name="rocket_meters">meters</string>
+
+
+    <!-- Messages -->
+    <string name="error_no_launches">No launches yet</string>
+    <string name="error_no_rockets">No rockets found</string>
+    <string name="error_something_wrong">Ooops.... something went worng!!!</string>
+    <string name="error_no_internet">Ooops.... it seems that you don\'t have internet connection...</string>
+    <string name="error_reload">Reload</string>
+
+    <!-- Settings fragment -->
+    <string name="settings_status">Filter rockets by status:</string>
+    <string name="settings_apply">Apply filter</string>
+    <string name="settings_reset">Reset filter</string>
+    <string name="settings_radio_active">Active rockets</string>
+    <string name="settings_radio_inactive">Inactive rockets</string>
+</resources>

@@ -42,27 +42,17 @@ class PreferencesProvider private constructor(context: Context) {
         editor.clear().apply()
     }
 
-    /**
-     * FILTERS ENABLED
-     */
-    fun isRocketsFilterEnabled(): Boolean {
-        return mPrefs.getBoolean(PreferencesKey.ROCKETS_FILTER_ENABLED.name, false)
-    }
+    var filtersEnabled: Boolean
+        get() = mPrefs.getBoolean(PreferencesKey.ROCKETS_FILTER_ENABLED.name, false)
+        set(value) {
+            val editor = mPrefs.edit()
+            editor.putBoolean(PreferencesKey.ROCKETS_FILTER_ENABLED.name, value).apply()
+        }
 
-    fun setRocketsFilterEnabled(value: Boolean) {
-        val editor = mPrefs.edit()
-        editor.putBoolean(PreferencesKey.ROCKETS_FILTER_ENABLED.name, value).apply()
-    }
-
-    /**
-     * ACTIVE FILTER
-     */
-    fun getActiveFilter(): Boolean {
-        return mPrefs.getBoolean(PreferencesKey.ROCKETS_ACTIVE_FILTER.name, false)
-    }
-
-    fun setActiveFilter(value: Boolean) {
-        val editor = mPrefs.edit()
-        editor.putBoolean(PreferencesKey.ROCKETS_ACTIVE_FILTER.name, value).apply()
-    }
+    var activeFilterValue: Boolean
+        get() = mPrefs.getBoolean(PreferencesKey.ROCKETS_ACTIVE_FILTER.name, false)
+        set(value) {
+            val editor = mPrefs.edit()
+            editor.putBoolean(PreferencesKey.ROCKETS_ACTIVE_FILTER.name, value).apply()
+        }
 }

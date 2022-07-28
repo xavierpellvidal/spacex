@@ -44,7 +44,7 @@ class RocketListFragment : Fragment(), (Rocket) -> Unit {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getRocketsList(SpaceXApp.mPrefs.isRocketsFilterEnabled(), SpaceXApp.mPrefs.getActiveFilter())
+        viewModel.getRocketsList(SpaceXApp.mPrefs.filtersEnabled, SpaceXApp.mPrefs.activeFilterValue)
 
         setAdapter()
         setObservers()
@@ -76,7 +76,7 @@ class RocketListFragment : Fragment(), (Rocket) -> Unit {
     private fun reloadRockets() {
         // Hide error and reload data
         binding.linearError.visibility = View.GONE
-        viewModel.getRocketsList(SpaceXApp.mPrefs.isRocketsFilterEnabled(), SpaceXApp.mPrefs.getActiveFilter())
+        viewModel.getRocketsList(SpaceXApp.mPrefs.filtersEnabled, SpaceXApp.mPrefs.activeFilterValue)
     }
 
     private fun setObservers() {

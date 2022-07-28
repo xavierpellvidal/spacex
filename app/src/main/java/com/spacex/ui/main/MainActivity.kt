@@ -48,9 +48,9 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
     private fun fillSettingsTab() {
         // Fill settings tab options
-        if (SpaceXApp.mPrefs.isRocketsFilterEnabled()) {
-            binding.radioActive.isChecked = SpaceXApp.mPrefs.getActiveFilter()
-            binding.radioInactive.isChecked = !SpaceXApp.mPrefs.getActiveFilter()
+        if (SpaceXApp.mPrefs.filtersEnabled) {
+            binding.radioActive.isChecked = SpaceXApp.mPrefs.activeFilterValue
+            binding.radioInactive.isChecked = !SpaceXApp.mPrefs.activeFilterValue
         } else {
             SpaceXApp.mPrefs.clear()
             binding.radioGroup.clearCheck()
@@ -61,8 +61,8 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         // Apply filters
         binding.buttonApply.setOnClickListener {
             if (binding.radioActive.isChecked || binding.radioInactive.isChecked) {
-                SpaceXApp.mPrefs.setRocketsFilterEnabled(true)
-                SpaceXApp.mPrefs.setActiveFilter(binding.radioActive.isChecked)
+                SpaceXApp.mPrefs.filtersEnabled = true
+                SpaceXApp.mPrefs.activeFilterValue = binding.radioActive.isChecked
                 rocketsListViewModel.getRocketsList(true, binding.radioActive.isChecked)
             }
             settingsTabChangeState()

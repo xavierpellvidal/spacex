@@ -22,7 +22,6 @@ class RocketListFragment : Fragment(), (Rocket) -> Unit {
 
     // Properties
     private lateinit var rocketsAdapter: RocketListAdapter
-    private val rocketsList = ArrayList<Rocket>()
 
     // View model linked to parent activity
     private val viewModel: RocketListViewModel by activityViewModels()
@@ -51,7 +50,7 @@ class RocketListFragment : Fragment(), (Rocket) -> Unit {
 
     private fun setAdapter() {
         // Create adapter
-        rocketsAdapter = RocketListAdapter(rocketsList, this, context)
+        rocketsAdapter = RocketListAdapter(this, context)
         rocketsAdapter!!.stateRestorationPolicy =
             RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
@@ -114,16 +113,14 @@ class RocketListFragment : Fragment(), (Rocket) -> Unit {
     }
 
     private fun showRockets(rockets: MutableList<Rocket>) {
-        // Clear list
-        rocketsList.clear()
-        rocketsList.addAll(rockets)
+        //Update rocket list
+        rockets?.let {
+            rocketsAdapter.submitList(it)
+        }
 
         //Show results and hide error div
         binding.linearError.visibility = View.GONE
         binding.principalContraint.visibility = View.VISIBLE
-
-        // Notify items changed
-        binding.rocketsList.adapter!!.notifyDataSetChanged()
 
         // Hide loader
         binding.swipeRefresh.isRefreshing = false

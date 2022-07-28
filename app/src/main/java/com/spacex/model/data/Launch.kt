@@ -3,7 +3,7 @@ package com.spacex.model.data
 import java.io.Serializable
 import java.util.*
 
-class Launch(
+data class Launch(
 
     var name: String,
     var date_utc: Date,
@@ -12,7 +12,7 @@ class Launch(
 
 ) : Serializable
 
-class Links(
+data class Links(
 
     var presskit: String?,
     var youtube_id: String?,
@@ -20,7 +20,7 @@ class Links(
 
 ) : Serializable
 
-class LaunchesQueryResponse(
+data class LaunchesQueryResponse(
 
     var docs: MutableList<Launch>
 

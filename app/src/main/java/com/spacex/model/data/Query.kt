@@ -2,13 +2,13 @@ package com.spacex.model.data
 
 import java.io.Serializable
 
-class Query(
+data class Query(
 
     var query: QueryObject
 
 ) : Serializable
 
-class QueryObject(
+data class QueryObject(
 
     var rocket: String
 

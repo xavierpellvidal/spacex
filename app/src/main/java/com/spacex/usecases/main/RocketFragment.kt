@@ -20,8 +20,7 @@ import com.spacex.util.haveConnection
 
 class RocketFragment : Fragment() {
     // Properties
-    private var launchesAdapter: LaunchListAdapter? = null
-    private val launchList = ArrayList<Launch>()
+    private lateinit var launchesAdapter: LaunchListAdapter
     private lateinit var rocketID: String
 
     // View model
@@ -63,7 +62,7 @@ class RocketFragment : Fragment() {
 
     private fun setAdapter() {
         // Create adapter
-        launchesAdapter = LaunchListAdapter(launchList, context)
+        launchesAdapter = LaunchListAdapter(context)
         launchesAdapter!!.stateRestorationPolicy =
             RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
@@ -137,13 +136,11 @@ class RocketFragment : Fragment() {
         binding.recyclerLaunches.visibility = View.GONE
     }
 
-    private fun showLaunches(launch: MutableList<Launch>) {
-        // Clear list
-        launchList.clear()
-        launchList.addAll(launch)
-
-        // Notify items changed
-        binding.recyclerLaunches.adapter!!.notifyDataSetChanged()
+    private fun showLaunches(launches: MutableList<Launch>) {
+        //Update launches list
+        launches?.let {
+            launchesAdapter.submitList(it)
+        }
 
         // Show launches
         binding.recyclerLaunches.visibility = View.VISIBLE

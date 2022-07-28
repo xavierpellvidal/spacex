@@ -2,7 +2,7 @@ package com.spacex.model.data
 
 import java.io.Serializable
 
-class Rocket(
+data class Rocket(
 
     var id: String,
     var name: String,
@@ -16,19 +16,19 @@ class Rocket(
 
     ) : Serializable
 
-class Engines(
+data class Engines(
 
     var number: Int,
 
     ) : Serializable
 
-class Height(
+data class Height(
 
     var meters: Double,
 
     ) : Serializable
 
-class Mass(
+data class Mass(
 
     var kg: Int
 

@@ -4,33 +4,30 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.spacex.R
 import com.spacex.databinding.ItemLaunchBinding
+import com.spacex.databinding.ItemRocketBinding
 import com.spacex.model.data.Launch
 import com.spacex.util.openWebPage
 import com.spacex.util.openYoutubeVideo
 import java.text.SimpleDateFormat
 import java.util.*
 
-class LaunchListAdapter(val launches: MutableList<Launch>, var context: Context?) :
-    RecyclerView.Adapter<LaunchListAdapter.RocketViewHolderStyle>() {
+class LaunchListAdapter(var context: Context?) : ListAdapter<Launch, LaunchListAdapter.LaunchViewHolder>(LaunchDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RocketViewHolderStyle {
-        return RocketViewHolderStyle(
-            ItemLaunchBinding.inflate(
-                LayoutInflater.from(context),
-                parent,
-                false
-            )
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LaunchViewHolder {
+        return LaunchViewHolder.from(parent, context)
     }
 
-    override fun onBindViewHolder(holder: RocketViewHolderStyle, position: Int) {
-        holder.bindStyle(launches[position])
+    override fun onBindViewHolder(holder: LaunchViewHolder, position: Int) {
+        val item = getItem(position)
+        holder.bindStyle(item)
     }
 
-    inner class RocketViewHolderStyle(private val binding: ItemLaunchBinding) :
+    class LaunchViewHolder(private val binding: ItemLaunchBinding, var context: Context?) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindStyle(launches: Launch): Unit = with(binding) {
             // Date formatter
@@ -87,7 +84,25 @@ class LaunchListAdapter(val launches: MutableList<Launch>, var context: Context?
                 }
             } else presskit.visibility = View.GONE
         }
+
+        companion object {
+            fun from(parent: ViewGroup, context: Context?): LaunchViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ItemLaunchBinding.inflate(layoutInflater, parent, false)
+                return LaunchViewHolder(binding, context)
+            }
+        }
+    }
+}
+
+class LaunchDiffCallback : DiffUtil.ItemCallback<Launch>() {
+
+    override fun areItemsTheSame(oldItem: Launch, newItem: Launch): Boolean {
+        return oldItem.name == newItem.name
     }
 
-    override fun getItemCount(): Int = launches.size
+    override fun areContentsTheSame(oldItem: Launch, newItem: Launch): Boolean {
+        return oldItem == newItem
+    }
+
 }

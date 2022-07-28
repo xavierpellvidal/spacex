@@ -6,6 +6,7 @@ import com.spacex.data.repository.LaunchesRepository
 import com.spacex.data.repository.api.v4.SpaceXAPINetworkResult
 import com.spacex.UseCaseResponse
 import com.spacex.data.repository.RepositoryResponse
+import com.spacex.util.haveConnection
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

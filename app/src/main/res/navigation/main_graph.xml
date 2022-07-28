@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/RocketListFragment"
-        android:name="com.spacex.usecases.main.RocketListFragment"
+        android:name="com.spacex.ui.main.RocketListFragment"
         android:label="@string/rockets_list_label"
         tools:layout="@layout/fragment_rocket_list">
 
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/RocketFragment"
-        android:name="com.spacex.usecases.main.RocketFragment"
+        android:name="com.spacex.ui.main.RocketFragment"
         android:label="@string/rocket_label"
         tools:layout="@layout/fragment_rocket">
 

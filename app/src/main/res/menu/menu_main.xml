@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.spacex.usecases.main.MainActivity">
+    tools:context="com.spacex.ui.main.MainActivity">
 
     <item
         android:id="@+id/item_filter"

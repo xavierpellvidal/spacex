@@ -1,8 +1,8 @@
 package com.spacex
 
 import android.app.Application
-import com.spacex.model.repository.api.v4.SpaceXAPI
-import com.spacex.model.repository.preferences.PreferencesProvider
+import com.spacex.data.repository.api.v4.SpaceXAPI
+import com.spacex.data.repository.preferences.PreferencesProvider
 
 class SpaceXApp : Application() {
 

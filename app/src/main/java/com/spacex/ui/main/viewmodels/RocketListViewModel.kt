@@ -1,5 +1,6 @@
 package com.spacex.ui.main.viewmodels
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,23 +11,25 @@ import com.spacex.ui.main.domain.GetRockets
 import com.spacex.ViewModelResponse
 import kotlinx.coroutines.launch
 
-class RocketListViewModel() : ViewModel() {
-    // Provider
+class RocketListViewModel : ViewModel() {
+    // Domain use cases
     private var rocketsUseCase = GetRockets()
     private var filteredRocketsUseCase = GetFilteredRockets()
 
-    // Public vars
-    var rockets: MutableLiveData<MutableList<Rocket>> = MutableLiveData()
-    val loader: MutableLiveData<Boolean> = MutableLiveData()
-    val error: MutableLiveData<ViewModelResponse> = MutableLiveData()
-
+    // Livedata
+    private val _rockets: MutableLiveData<MutableList<Rocket>> = MutableLiveData()
+    val rockets: LiveData<MutableList<Rocket>> = _rockets
+    private val _loader: MutableLiveData<Boolean> = MutableLiveData()
+    val loader: LiveData<Boolean> = _loader
+    private val _error: MutableLiveData<ViewModelResponse> = MutableLiveData()
+    val error: LiveData<ViewModelResponse> = _error
 
     // Get rocket list function
     fun getRocketsList(enabledFilters: Boolean, activeFilter: Boolean) {
         /* Load data coroutine */
         viewModelScope.launch {
             // Start data loading
-            loader.postValue(true)
+            _loader.postValue(true)
 
             if(enabledFilters)
                 loadFilteredData(activeFilter)
@@ -34,7 +37,7 @@ class RocketListViewModel() : ViewModel() {
                 loadData()
 
             // Hide loader
-            loader.postValue(false)
+            _loader.postValue(false)
         }
     }
 
@@ -43,11 +46,11 @@ class RocketListViewModel() : ViewModel() {
         when (val response = rocketsUseCase.getRockets()) {
             is UseCaseResponse.Success -> {
                 // Post value to view
-                rockets.postValue(response.data)
+                _rockets.postValue(response.data)
             }
-            is UseCaseResponse.NoData -> error.postValue(ViewModelResponse.NULL_EMPTY_DATA)
-            is UseCaseResponse.NoNetwork -> error.postValue(ViewModelResponse.NO_NETWORK)
-            is UseCaseResponse.GenericError -> error.postValue(ViewModelResponse.GENERIC_ERROR)
+            is UseCaseResponse.NoData -> _error.postValue(ViewModelResponse.NULL_EMPTY_DATA)
+            is UseCaseResponse.NoNetwork -> _error.postValue(ViewModelResponse.NO_NETWORK)
+            is UseCaseResponse.GenericError -> _error.postValue(ViewModelResponse.GENERIC_ERROR)
         }
     }
 
@@ -56,11 +59,11 @@ class RocketListViewModel() : ViewModel() {
         when (val response = filteredRocketsUseCase.getFilteredRockets(activeFilter)) {
             is UseCaseResponse.Success -> {
                 // Post value to view
-                rockets.postValue(response.data)
+                _rockets.postValue(response.data)
             }
-            is UseCaseResponse.NoData -> error.postValue(ViewModelResponse.NULL_EMPTY_DATA)
-            is UseCaseResponse.NoNetwork -> error.postValue(ViewModelResponse.NO_NETWORK)
-            is UseCaseResponse.GenericError -> error.postValue(ViewModelResponse.GENERIC_ERROR)
+            is UseCaseResponse.NoData -> _error.postValue(ViewModelResponse.NULL_EMPTY_DATA)
+            is UseCaseResponse.NoNetwork -> _error.postValue(ViewModelResponse.NO_NETWORK)
+            is UseCaseResponse.GenericError -> _error.postValue(ViewModelResponse.GENERIC_ERROR)
         }
     }
 }

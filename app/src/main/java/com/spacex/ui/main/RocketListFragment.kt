@@ -23,6 +23,7 @@ class RocketListFragment : Fragment(), (Rocket) -> Unit {
 
     // Properties
     private lateinit var rocketsAdapter: RocketListAdapter
+    private var firstLoad = true
 
     // View model linked to parent activity
     private val viewModel: RocketListViewModel by activityViewModels()
@@ -44,11 +45,18 @@ class RocketListFragment : Fragment(), (Rocket) -> Unit {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getRocketsList(SpaceXApp.mPrefs.filtersEnabled, SpaceXApp.mPrefs.activeFilterValue)
-
         setAdapter()
         setObservers()
         setListeners()
+
+        //Only load rockets data first time fragment created
+        if(firstLoad) {
+            viewModel.getRocketsList(
+                SpaceXApp.mPrefs.filtersEnabled,
+                SpaceXApp.mPrefs.activeFilterValue
+            )
+            firstLoad = !firstLoad
+        }
     }
 
     private fun setAdapter() {

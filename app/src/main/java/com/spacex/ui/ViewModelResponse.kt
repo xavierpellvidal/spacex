@@ -1,4 +1,4 @@
-package com.spacex
+package com.spacex.ui
 
 enum class ViewModelResponse {
     NULL_EMPTY_DATA,

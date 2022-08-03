@@ -1,10 +1,9 @@
 package com.spacex.data.repository;
 
-import com.spacex.SpaceXApp
 import com.spacex.SpaceXApp.Companion.apiService
 import com.spacex.data.model.Rocket
-import com.spacex.data.repository.api.v4.SpaceXAPINetworkResult
-import com.spacex.data.repository.api.v4.handleApiResult
+import com.spacex.data.provider.api.SpaceXAPINetworkResult
+import com.spacex.data.provider.api.handleApiResult
 
 object RocketsRepository {
 

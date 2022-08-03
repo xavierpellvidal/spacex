@@ -16,7 +16,7 @@ import com.spacex.databinding.FragmentRocketListBinding
 import com.spacex.data.model.Rocket
 import com.spacex.ui.main.adapters.RocketListAdapter
 import com.spacex.ui.main.viewmodels.RocketListViewModel
-import com.spacex.ViewModelResponse
+import com.spacex.ui.ViewModelResponse
 import com.spacex.util.haveConnection
 
 class RocketListFragment : Fragment(), (Rocket) -> Unit {
@@ -61,13 +61,13 @@ class RocketListFragment : Fragment(), (Rocket) -> Unit {
 
     private fun setAdapter() {
         // Create adapter
-        rocketsAdapter = RocketListAdapter(this, context)
-        rocketsAdapter!!.stateRestorationPolicy =
+        rocketsAdapter = RocketListAdapter(this)
+        rocketsAdapter.stateRestorationPolicy =
             RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
         // Load info
         binding.rocketsList.layoutManager =
-            LinearLayoutManager(context!!, RecyclerView.VERTICAL, false)
+            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         binding.rocketsList.adapter = rocketsAdapter
     }
 
@@ -110,7 +110,7 @@ class RocketListFragment : Fragment(), (Rocket) -> Unit {
         when (error) {
             ViewModelResponse.NULL_EMPTY_DATA -> showUIError(getText(R.string.error_no_rockets))
             ViewModelResponse.NO_NETWORK -> {
-                if (!haveConnection(context!!)) showUIError(getText(R.string.error_no_internet))
+                if (!haveConnection(requireContext())) showUIError(getText(R.string.error_no_internet))
                 else showUIError(getText(R.string.error_something_wrong))
             }
             ViewModelResponse.GENERIC_ERROR -> showUIError(getText(R.string.error_something_wrong))
@@ -125,7 +125,7 @@ class RocketListFragment : Fragment(), (Rocket) -> Unit {
 
     private fun showRockets(rockets: MutableList<Rocket>) {
         //Update rocket list
-        rockets?.let {
+        rockets.let {
             rocketsAdapter.submitList(it)
         }
 

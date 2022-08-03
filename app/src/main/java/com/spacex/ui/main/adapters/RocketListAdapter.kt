@@ -11,10 +11,10 @@ import com.spacex.R
 import com.spacex.databinding.ItemRocketBinding
 import com.spacex.data.model.Rocket
 
-class RocketListAdapter(private val onRocketClick: (Rocket) -> Unit, var context: Context?) : ListAdapter<Rocket, RocketListAdapter.RocketViewHolder>(RocketDiffCallback()) {
+class RocketListAdapter(private val onRocketClick: (Rocket) -> Unit) : ListAdapter<Rocket, RocketListAdapter.RocketViewHolder>(RocketDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RocketViewHolder {
-        return RocketViewHolder.from(parent, context, onRocketClick)
+        return RocketViewHolder.from(parent, onRocketClick)
     }
 
     override fun onBindViewHolder(holder: RocketViewHolder, position: Int) {
@@ -22,27 +22,27 @@ class RocketListAdapter(private val onRocketClick: (Rocket) -> Unit, var context
         holder.bindStyle(item)
     }
 
-    class RocketViewHolder private constructor(private val binding: ItemRocketBinding, var context: Context?, val onRocketClick: (Rocket) -> Unit) :
+    class RocketViewHolder private constructor(private val binding: ItemRocketBinding, var context: Context, val onRocketClick: (Rocket) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindStyle(rocket: Rocket): Unit = with(binding) {
             //  Fill ui
             binding.txtName.text = rocket.name + " "
-            Glide.with(context!!).load(rocket.flickr_images[0]).into(binding.imgProfile)
+            Glide.with(context).load(rocket.flickr_images[0]).into(binding.imgProfile)
 
             binding.txtLocation.text = rocket.country
             binding.txtEngines.text =
-                rocket.engines.number.toString() + " " + context!!.getText(R.string.rockets_list_engines)
+                rocket.engines.number.toString() + " " + context.getText(R.string.rockets_list_engines)
 
             if (rocket.active) binding.imgToggle.setColorFilter(
-                context!!.resources.getColor(
+                context.resources.getColor(
                     R.color.success,
-                    context!!.theme
+                    context.theme
                 )
             )
             else binding.imgToggle.setColorFilter(
-                context!!.resources.getColor(
+                context.resources.getColor(
                     R.color.grey600,
-                    context!!.theme
+                    context.theme
                 )
             )
 
@@ -55,10 +55,10 @@ class RocketListAdapter(private val onRocketClick: (Rocket) -> Unit, var context
         }
 
         companion object {
-            fun from(parent: ViewGroup, context: Context?, onRocketClick: (Rocket) -> Unit): RocketViewHolder {
+            fun from(parent: ViewGroup, onRocketClick: (Rocket) -> Unit): RocketViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemRocketBinding.inflate(layoutInflater, parent, false)
-                return RocketViewHolder(binding,  context, onRocketClick)
+                return RocketViewHolder(binding, parent.context, onRocketClick)
             }
         }
     }

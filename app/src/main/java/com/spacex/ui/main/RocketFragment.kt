@@ -15,7 +15,7 @@ import com.spacex.data.model.Launch
 import com.spacex.data.model.Rocket
 import com.spacex.ui.main.adapters.LaunchListAdapter
 import com.spacex.ui.main.viewmodels.RocketViewModel
-import com.spacex.ViewModelResponse
+import com.spacex.ui.ViewModelResponse
 import com.spacex.util.haveConnection
 
 class RocketFragment : Fragment() {
@@ -62,13 +62,13 @@ class RocketFragment : Fragment() {
 
     private fun setAdapter() {
         // Create adapter
-        launchesAdapter = LaunchListAdapter(context)
-        launchesAdapter!!.stateRestorationPolicy =
+        launchesAdapter = LaunchListAdapter()
+        launchesAdapter.stateRestorationPolicy =
             RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
         // Load info
         binding.recyclerLaunches.layoutManager =
-            LinearLayoutManager(context!!, RecyclerView.VERTICAL, false)
+            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         binding.recyclerLaunches.adapter = launchesAdapter
         binding.recyclerLaunches.isNestedScrollingEnabled = false
     }
@@ -138,7 +138,7 @@ class RocketFragment : Fragment() {
 
     private fun showLaunches(launches: MutableList<Launch>) {
         //Update launches list
-        launches?.let {
+        launches.let {
             launchesAdapter.submitList(it)
         }
 

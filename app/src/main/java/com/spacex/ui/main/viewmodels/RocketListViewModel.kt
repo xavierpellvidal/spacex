@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.spacex.data.model.Rocket
-import com.spacex.UseCaseResponse
-import com.spacex.ui.main.domain.GetFilteredRockets
-import com.spacex.ui.main.domain.GetRockets
-import com.spacex.ViewModelResponse
+import com.spacex.domain.UseCaseResponse
+import com.spacex.domain.rocket.GetFilteredRockets
+import com.spacex.domain.rocket.GetRockets
+import com.spacex.ui.ViewModelResponse
 import kotlinx.coroutines.launch
 
 class RocketListViewModel : ViewModel() {

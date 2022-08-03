@@ -1,9 +1,9 @@
-package com.spacex.ui.main.domain
+package com.spacex.domain.rocket
 
 import com.spacex.data.model.Rocket
 import com.spacex.data.repository.RepositoryResponse
 import com.spacex.data.repository.RocketsRepository
-import com.spacex.UseCaseResponse
+import com.spacex.domain.UseCaseResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

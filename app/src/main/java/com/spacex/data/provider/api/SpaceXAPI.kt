@@ -1,4 +1,4 @@
-package com.spacex.data.repository.api.v4
+package com.spacex.data.provider.api
 
 import com.spacex.data.model.LaunchesQueryResponse
 import com.spacex.data.model.Query

@@ -1,4 +1,4 @@
-package com.spacex
+package com.spacex.domain
 
 sealed class UseCaseResponse<out T : Any> {
     class Success<T : Any>(val data: T) : UseCaseResponse<T>()

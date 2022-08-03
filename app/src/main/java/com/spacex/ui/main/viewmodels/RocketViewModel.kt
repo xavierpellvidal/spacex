@@ -8,10 +8,10 @@ import com.spacex.data.model.Launch
 import com.spacex.data.model.Query
 import com.spacex.data.model.QueryObject
 import com.spacex.data.model.Rocket
-import com.spacex.UseCaseResponse
-import com.spacex.ui.main.domain.GetLaunches
-import com.spacex.ui.main.domain.GetRocket
-import com.spacex.ViewModelResponse
+import com.spacex.domain.UseCaseResponse
+import com.spacex.domain.launch.GetLaunches
+import com.spacex.domain.rocket.GetRocket
+import com.spacex.ui.ViewModelResponse
 import kotlinx.coroutines.launch
 
 class RocketViewModel : ViewModel() {
